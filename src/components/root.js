@@ -11,11 +11,9 @@ const Root = ({ store }) => (
             <div>
                 <Link to="/"> todo list </Link>{'|'}
                 <Link to={{pathname: '/finished'}}> finished </Link>{'|'}
-                <Link to="/contact">haha</Link>
-                <Switch>
-                    <Route exact path="/" component={TodoList} />
-                    <Route path="/finished" component={FinishedList} />
-                </Switch>
+                <Link to="/contact"> haha </Link>
+                <Route exact path="/" component={TodoList} />
+                <Route exact path="/finished" component={FinishedList} />
             </div>
         </HashRouter>
 

@@ -1,4 +1,7 @@
 import * as React from "react";
+import {ADD_TODO_ITEM, GET_TODO_ITEM, REMOVE_TODO_ITEM, TOGGLE_TODO_ITEM} from "../actiontypes";
+import {connect} from "react-redux";
+import axios from "axios";
 
 class TodoInput extends React.Component {
     constructor(props) {
@@ -15,11 +18,15 @@ class TodoInput extends React.Component {
     };
 
     handlePost = () => {
-        this.props.post(this.state.text)
+        console.log("--->add item")
+        axios.post('https://5e9ec500fb467500166c4658.mockapi.io/todos',{content:this.state.text, status: false})
+            .then((response)=> {
+                this.props.addItem(response.data)
+            })
         this.setState({
             text: ""
         });
-    }
+    };
 
     render() {
         return (
@@ -31,4 +38,10 @@ class TodoInput extends React.Component {
     }
 }
 
-export default TodoInput;
+const mapDispatchToProps = dispatch => {
+    return {
+        addItem: (text) => {dispatch({type: ADD_TODO_ITEM, text})}
+    }
+};
+
+export default connect(null, mapDispatchToProps)(TodoInput)

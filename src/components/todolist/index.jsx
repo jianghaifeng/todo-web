@@ -1,22 +1,31 @@
 import * as React from "react";
 import TodoItem from "../todoitem";
 import TodoInput from "../todoInput";
-import {ADD_TODO_ITEM, REMOVE_TODO_ITEM, TOGGLE_TODO_ITEM} from "../actiontypes";
+import {ADD_TODO_ITEM, GET_TODO_ITEM, REMOVE_TODO_ITEM, TOGGLE_TODO_ITEM} from "../actiontypes";
 import {connect} from "react-redux";
+import axios from 'axios';
 
 class TodoList extends React.Component {
     constructor(props) {
         super(props);
     }
 
+    componentDidMount() {
+        console.log("--->get items")
+        axios.get('https://5e9ec500fb467500166c4658.mockapi.io/todos')
+            .then((response)=> {
+                this.props.getItemList(response.data)
+            })
+    }
+
     render() {
         return (
             <div>
             <h2>todo list</h2>
-                <TodoInput post={this.props.addItem}/>
+                <TodoInput />
                 {
                     this.props.todoItems.map((value,index) =>
-                        <TodoItem id={index} remove={this.props.removeItem} toggle={this.props.toggleItemFinish} key={index} value={value}/>)
+                        <TodoItem key={index} value={value}/>)
                 }
             </div>
         )
@@ -29,9 +38,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addItem: (text) => {dispatch({type: ADD_TODO_ITEM, text})},
-        removeItem: (index) => {dispatch({type: REMOVE_TODO_ITEM, index})},
-        toggleItemFinish: (index) => {dispatch({type: TOGGLE_TODO_ITEM, index})},
+        getItemList: (itemList) => {dispatch({type: GET_TODO_ITEM, itemList})}
     }
 };
 

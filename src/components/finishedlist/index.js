@@ -1,6 +1,6 @@
 import * as React from "react";
 import TodoItem from "../todoitem";
-import {ADD_TODO_ITEM, REMOVE_TODO_ITEM, TOGGLE_TODO_ITEM} from "../actiontypes";
+import {ADD_TODO_ITEM, GET_TODO_ITEM, REMOVE_TODO_ITEM, TOGGLE_TODO_ITEM} from "../actiontypes";
 import {connect} from "react-redux";
 
 class FinishedList extends React.Component {
@@ -9,14 +9,13 @@ class FinishedList extends React.Component {
     }
 
     render() {
-        const finishedItems = this.props.todoItems.filter((value, index) => value.finished === true);
-        console.log(finishedItems);
+        const finishedItems = this.props.todoItems.filter((value, index) => value.status === true);
         return (
             <div>
                 <h2>finished list</h2>
                 {
                     finishedItems.map((value,index) =>
-                        <TodoItem id={index} remove={this.props.removeItem} toggle={this.props.toggleItemFinish} key={index} value={value}/>)
+                        <TodoItem key={index} value={value}/>)
                 }
             </div>
         )
@@ -29,9 +28,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addItem: (text) => {dispatch({type: ADD_TODO_ITEM, text})},
-        removeItem: (index) => {dispatch({type: "", index})},
-        toggleItemFinish: (index) => {dispatch({type: "", index})},
+        getItemList: (itemList) => {dispatch({type: GET_TODO_ITEM, itemList})}
     }
 };
 
