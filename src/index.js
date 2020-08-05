@@ -1,19 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from "react-redux";
 import {createStore} from "redux";
 import TodoReducer from "./components/reducer";
+import Root from "./components/root";
 
-const todoStore = createStore(TodoReducer)
+const todoStore = createStore(TodoReducer);
+
 ReactDOM.render(
-    <React.StrictMode>
-        <Provider store={todoStore}>
-            <App/>
-        </Provider>
-    </React.StrictMode>,
+    <Root store={todoStore} />,
     document.getElementById('root')
 );
 
