@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
-import {HashRouter, Link, Route, Switch} from 'react-router-dom'
+import {HashRouter, Link, Route} from 'react-router-dom'
 import FinishedList from "./finishedlist";
 import TodoList from "./todolist";
 

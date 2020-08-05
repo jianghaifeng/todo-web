@@ -1,7 +1,8 @@
 import * as React from "react";
-import {ADD_TODO_ITEM, GET_TODO_ITEM, REMOVE_TODO_ITEM, TOGGLE_TODO_ITEM} from "../actiontypes";
+import {ADD_TODO_ITEM} from "../actiontypes";
 import {connect} from "react-redux";
 import axios from "axios";
+import {ApiUrl} from "../../url";
 
 class TodoInput extends React.Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class TodoInput extends React.Component {
 
     handlePost = () => {
         console.log("--->add item")
-        axios.post('https://5e9ec500fb467500166c4658.mockapi.io/todos',{content:this.state.text, status: false})
+        axios.post(ApiUrl,{content:this.state.text, status: false})
             .then((response)=> {
                 this.props.addItem(response.data)
             })

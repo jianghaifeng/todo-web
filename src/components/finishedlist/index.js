@@ -1,13 +1,9 @@
 import * as React from "react";
 import TodoItem from "../todoitem";
-import {ADD_TODO_ITEM, GET_TODO_ITEM, REMOVE_TODO_ITEM, TOGGLE_TODO_ITEM} from "../actiontypes";
+import {GET_TODO_ITEM} from "../actiontypes";
 import {connect} from "react-redux";
 
 class FinishedList extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const finishedItems = this.props.todoItems.filter((value, index) => value.status === true);
         return (
